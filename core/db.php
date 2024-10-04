@@ -1,31 +1,13 @@
 <?php
 
-// Autoload di Composer
-require  'C:\laragon\www\php_project_start2impact\vendor\autoload.php';
-
-use Dotenv\Dotenv;
-
-// Carica il file .env
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
-
-
-define('DB_HOST', $_ENV['DB_HOST']);
-define('DB_NAME', $_ENV['DB_NAME']);
-define('DB_USER', $_ENV['DB_USER']);
-define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
-
-echo realpath(__DIR__ . '/../vendor/autoload.php');
-
-
 
 class Database
 {
   // DB params
-  private $host = DB_HOST;
-  private $db_name = DB_NAME;
-  private $username = DB_USER;
-  private $password = DB_PASSWORD;
+  private $host = 'localhost';
+  private $db_name = 'orizon_start2impact_project';
+  private $username = 'root';
+  private $password = 'galfadase5';
   private $conn;
 
   //DB connect

@@ -15,8 +15,10 @@ $db = $database->connect();
 //Instantiate category object
 $country = new Country($db);
 
+$condition = isset($_GET['country']) ? $_GET['country'] : null;
+
 // Category read query
-$result = $country->read();
+$result = $country->read($condition);
 // Get row count
 $num = $result->rowCount();
 
@@ -41,8 +43,8 @@ if ($num > 0) {
   //Turn to JSON & output
   echo json_encode($country_arr);
 } else {
-  // no categories
+  // no country found
   echo json_encode(
-    array('message' => 'No categories found')
+    array('message' => 'No country found')
   );
 }

@@ -8,11 +8,14 @@
 </head>
 
 <body>
+  <nav></nav>
+  <h1>INSERT COUNTRY</h1>
 
-
-  <h1>Hello</h1>
-  <?php require 'core/db.php'; ?>
-
+  <form method="POST" action="controllers/country/create.php">
+    <label>Insert country</label>
+    <input type="text" name="country">
+    <input type="submit" name="submit" value="submit">
+  </form>
 
 </body>
 

@@ -10,7 +10,6 @@ class Country
   public $id;
   public $country;
 
-
   //Constructor with DB
   public function __construct($db)
   {
@@ -18,18 +17,27 @@ class Country
   }
 
   //Get Country
-  public function read()
+  public function read($country = null)
   {
     //create query
     $query = 'SELECT 
               id, country
               FROM
-              ' . $this->table . ' 
-              ORDER BY
-              id ASC';
+              ' . $this->table;
+
+    $condition = $country != null ? 'country = :country' : null;
+
+    if ($condition) {
+      $query .= ' WHERE ' . $condition;
+    }
 
     //prepare statement
     $stmt = $this->conn->prepare($query);
+
+    // Bind dei parametri se esistono
+    if (!is_null($country)) {
+      $stmt->bindParam(':country', $country);
+    }
 
     //Execute the query
     $stmt->execute();
@@ -69,8 +77,9 @@ class Country
     // create query
     $query = 'INSERT INTO '
       . $this->table . '
-              SET
-              country = :country';
+              (country)
+              VALUES
+              (:country)';
 
 
     //Prepare statement

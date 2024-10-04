@@ -18,19 +18,27 @@ $db = $database->connect();
 //Instantiate object
 $country = new Country($db);
 
-//Get raw data
-$data = json_decode(file_get_contents("php://input"));
+$country->country = $_POST['country'] ?? null;
 
-$country->country = $data->country;
-
-
-//Create country
-if ($country->create()) {
+// Se country è null, blocca la creazione
+if (!$country->country) {
   echo json_encode(
-    array('message' => 'Country created')
+    array('message' => 'No country provided')
   );
-} else {
-  echo json_encode(
-    array('message' => 'Country  NOT created')
-  );
+  exit;
+}
+
+
+// Create country
+if (isset($_POST['submit'])) {
+  if ($country->create()) {
+    echo json_encode(
+      array('message' => 'Country created:')
+    );
+    echo ' ' . $country->country;
+  } else {
+    echo json_encode(
+      array('message' => 'Country  NOT created')
+    );
+  }
 }
