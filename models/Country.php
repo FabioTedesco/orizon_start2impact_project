@@ -78,8 +78,6 @@ class Country
     return false;
   }
 
-
-
   //Update country
   public function update()
   {
