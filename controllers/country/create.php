@@ -15,27 +15,38 @@ $database = new Database();
 $db = $database->connect();
 
 
-//Instantiate object
-$country = new Country($db);
-
-$country->country = $_POST['country'] ?? null;
-
-// Se country è null, blocca la creazione
-if (!$country->country) {
-  echo json_encode(
-    array('message' => 'No country provided')
-  );
-  exit;
-}
-
-
-// Create country
+// insert country depending on form or http request POST
 if (isset($_POST['submit'])) {
+  //get and clean form data
+  $country_form = htmlspecialchars(strip_tags($_POST['country']));
+
+  $query = "INSERT INTO 
+            country (country)
+            VALUES
+            ('$country_form')";
+
+  //Prepare statement
+  $stmt = $db->prepare($query);
+
+  //Execute query
+  if ($stmt->execute()) {
+    echo $country_form . ' inserito';
+    return true;
+  }
+} else {
+  //Instantiate object
+  $country = new Country($db);
+
+  //Get raw data
+  $data = json_decode(file_get_contents("php://input"));
+
+  $country->country = $data->country;
+
+  //Create country
   if ($country->create()) {
     echo json_encode(
-      array('message' => 'Country created:')
+      array('message' => 'Country created')
     );
-    echo ' ' . $country->country;
   } else {
     echo json_encode(
       array('message' => 'Country  NOT created')

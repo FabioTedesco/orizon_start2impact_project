@@ -45,36 +45,10 @@ class Country
     return $stmt;
   }
 
-  //Get single Country
-  public function read_single()
-  {
-    $query = 'SELECT 
-              id, country
-              FROM
-              ' . $this->table . ' 
-              WHERE
-              id =  ?
-              LIMIT 0,1';
-
-    //prepare stmt
-    $stmt = $this->conn->prepare($query);
-
-    //Bind ID
-    $stmt->bindParam(1, $this->id);
-
-    //Execute the query
-    $stmt->execute();
-
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // set properties
-    $this->country = $row['country'];
-  }
-
-  //Crate post
+  //Create country
   public function create()
   {
-    // create query
+    // create query 
     $query = 'INSERT INTO '
       . $this->table . '
               (country)
@@ -103,6 +77,8 @@ class Country
 
     return false;
   }
+
+
 
   //Update country
   public function update()
@@ -138,7 +114,7 @@ class Country
     return false;
   }
 
-  //Delete post
+  //Delete country
   public function delete()
   {
     //Create query
