@@ -99,6 +99,7 @@ class Trip
     return false;
   }
 
+  // Update trip
   public function update()
   {
     // create query
@@ -137,7 +138,7 @@ class Trip
     return false;
   }
 
-  //Delete post
+  //Delete trip
   public function delete()
   {
     //Create query

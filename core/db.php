@@ -1,13 +1,26 @@
 <?php
 
+require '../../vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+// Load file .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+define('DB_HOST', $_ENV['DB_HOST']);
+define('DB_NAME', $_ENV['DB_NAME']);
+define('DB_USER', $_ENV['DB_USER']);
+define('DB_PASSWORD', $_ENV['DB_PASSWORD']);
+
 
 class Database
 {
   // DB params
-  private $host = 'localhost';
-  private $db_name = 'orizon_start2impact_project';
-  private $username = 'root';
-  private $password = 'galfadase5';
+  private $host = DB_HOST;
+  private $db_name = DB_NAME;
+  private $username = DB_USER;
+  private $password = DB_PASSWORD;
   private $conn;
 
   //DB connect

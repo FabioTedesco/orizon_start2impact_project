@@ -15,10 +15,10 @@ $database = new Database();
 $db = $database->connect();
 
 
-//Instantiate blog post object
+//Instantiate Trip object
 $trip = new Trip($db);
 
-//Get rew posted data
+//Get data
 $data = json_decode(file_get_contents("php://input"));
 
 //Set ID to update

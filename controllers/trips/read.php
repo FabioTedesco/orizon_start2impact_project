@@ -12,11 +12,11 @@ $database = new Database();
 $db = $database->connect();
 
 
-//Instantiate blog post object
+//Instantiate trip object
 $trip = new Trip($db);
 
 
-//Get ID 
+//Get ID & available_slots
 $id_condition = isset($_GET['id']) ? $_GET['id'] : null;
 $available_slots_condition = isset($_GET['available_slots']) ? $_GET['available_slots'] : null;
 

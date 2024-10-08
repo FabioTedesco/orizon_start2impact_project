@@ -12,17 +12,18 @@ $database = new Database();
 $db = $database->connect();
 
 
-//Instantiate category object
+//Instantiate Country object
 $country = new Country($db);
 
+//Get condition
 $condition = isset($_GET['country']) ? $_GET['country'] : null;
 
-// Category read query
+// country read query
 $result = $country->read($condition);
 // Get row count
 $num = $result->rowCount();
 
-//Check if any categories
+//Check if any countries
 if ($num > 0) {
   //Cat array
   $country_arr = array();

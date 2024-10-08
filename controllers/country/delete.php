@@ -15,17 +15,17 @@ $database = new Database();
 $db = $database->connect();
 
 
-//Instantiate blog post object
+//Instantiate Country object
 $country = new Country($db);
 
-//Get rew posted data
+//Get data
 $data = json_decode(file_get_contents("php://input"));
 
 //Set ID to delete
 $country->id = $data->id;
 
 
-//delete post
+//delete country
 if ($country->delete()) {
   echo json_encode(
     array('message' => 'Country deleted')

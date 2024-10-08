@@ -15,23 +15,23 @@ $database = new Database();
 $db = $database->connect();
 
 
-//Instantiate blog post object
+//Instantiate Trip object
 $trip = new Trip($db);
 
-//Get rew posted data
+//Get data
 $data = json_decode(file_get_contents("php://input"));
 
 //Set ID to delete
 $trip->trip_id = $data->trip_id;
 
 
-//delete post
+//delete trip
 if ($trip->delete()) {
   echo json_encode(
-    array('message' => 'Country deleted')
+    array('message' => 'Trip deleted')
   );
 } else {
   echo json_encode(
-    array('message' => 'Country  NOT deleted')
+    array('message' => 'Trip  NOT deleted')
   );
 }
